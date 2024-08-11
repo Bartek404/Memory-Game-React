@@ -1,0 +1,58 @@
+html {
+	--s: 20px; /* control the size*/
+	--c1: #b09f79;
+	--c2: #476074;
+	--_g: #0000 83%, var(--c1) 85% 99%, #0000 101%;
+}
+
+.card {
+	position: relative;
+	perspective: 1000px;
+	margin: 1em;
+	height: 200px;
+	width: 124px;
+	transform-style: preserve-3d;
+	cursor: pointer;
+
+	transition: 300ms ease-in-out transform;
+}
+
+.card:hover {
+	transform: translate3d(-1px, -6px, 0px);
+}
+
+.cardInner {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	transition: transform 800ms;
+	transform-style: preserve-3d;
+}
+
+.cardActive {
+	transform: rotateY(-180deg);
+}
+
+.cardFront,
+.cardBack {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	background: radial-gradient(27% 29% at right, var(--_g)) calc(var(--s) / 2) var(--s),
+		radial-gradient(27% 29% at left, var(--_g)) calc(var(--s) / -2) var(--s),
+		radial-gradient(29% 27% at top, var(--_g)) 0 calc(var(--s) / 2),
+		radial-gradient(29% 27% at bottom, var(--_g)) 0 calc(var(--s) / -2) var(--c2);
+	background-size: calc(2 * var(--s)) calc(2 * var(--s));
+	border: 2px solid white;
+	border-radius: 15px;
+}
+
+.cardBack {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 3rem;
+	background: linear-gradient(to bottom right, #2b32b2, #416cff);
+	transform: rotateY(180deg);
+}

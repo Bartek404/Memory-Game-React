@@ -1,0 +1,19 @@
+.button {
+	margin: 1em;
+	width: 120px;
+	height: 50px;
+	color: white;
+	font-weight: 600;
+	text-transform: uppercase;
+	border: 1px solid white;
+	border-radius: 8px;
+	background: #ffffff33;
+	cursor: pointer;
+	transition: all 300ms;
+}
+
+.button:hover {
+	border-color: black;
+	color: black;
+	background: #ffffffab;
+}

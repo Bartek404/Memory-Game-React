@@ -1,0 +1,16 @@
+.infoBox {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 1em;
+	gap: 2em;
+	color: white;
+}
+
+.cardsBox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 100%;
+}
