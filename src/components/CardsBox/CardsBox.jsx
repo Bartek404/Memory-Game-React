@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Card } from '../Card/Card'
-import { cards } from '../../utils/cards'
+import { Button } from '../Button/Button'
+import { cards as cards, shuffle } from '../../utils/cards'
 import styles from '../CardsBox/CardsBox.module.css'
 
 // Poprawic reset, aby po resecie karty zostawaly na nowo wyrenderowane
@@ -13,6 +14,28 @@ export function CardsBox() {
 
 	const [cardClicks, setCardClicks] = useState(0)
 	const [matchedPairs, setMatchedPairs] = useState(0)
+	/* 	const [seconds, setSeconds] = useState(0)
+	const [minutes, setMinutes] = useState(0)
+
+	useEffect(() => {
+		setInterval(() => {
+			setSeconds(seconds + 1)
+
+			if (seconds > 59) {
+				setMinutes(minutes + 1)
+				setSeconds(0)
+			}
+		}, 1000)
+	}, [minutes, seconds]) */
+
+	function handleResetButton() {
+		resetPicks()
+		setFlippedCards([])
+		setIsThrottled(false)
+		setCardClicks(0)
+		setMatchedPairs(0)
+		shuffle(cards)
+	}
 
 	function handleCardClick(card) {
 		setCardClicks(cardClicks + 1)
@@ -52,7 +75,9 @@ export function CardsBox() {
 	return (
 		<>
 			<div className={styles.infoBox}>
-				{/* <div>Time: mm:ss</div> */}
+				{/* 				<div>
+					Time: {minutes}:{seconds}
+				</div> */}
 				<div>Clicks: {cardClicks}</div>
 				<div>Matched pairs: {matchedPairs}</div>
 			</div>
@@ -68,6 +93,7 @@ export function CardsBox() {
 					</Card>
 				))}
 			</div>
+			<Button onClick={handleResetButton}>Reset</Button>
 		</>
 	)
 }
