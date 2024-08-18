@@ -2,16 +2,20 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	text-align: center;
 }
 
 body {
-	margin: 0;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.background {
 	display: flex;
-	place-items: center;
-	min-width: 320px;
 	min-height: 100vh;
-	font-family: "Montserrat", sans-serif;
-	background: #606c88;
-	background: -webkit-linear-gradient(to bottom, #3f4c6b, #606c88);
-	background: linear-gradient(to bottom, #3f4c6b, #606c88);
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(45deg, rgb(32, 42, 100) 0%, rgba(225, 5, 34, 0) 70%) repeat scroll 0% 0%,
+		linear-gradient(135deg, rgb(122, 93, 141) 10%, rgba(49, 5, 209, 0) 80%) repeat scroll 0% 0%,
+		linear-gradient(225deg, rgb(71, 96, 116) 10%, rgba(10, 219, 216, 0) 80%) repeat scroll 0% 0%,
+		rgba(0, 0, 0, 0) linear-gradient(315deg, rgb(102, 121, 202) 100%, rgba(9, 245, 5, 0) 70%) repeat scroll 0% 0%;
 }

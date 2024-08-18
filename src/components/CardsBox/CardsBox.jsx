@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Card } from '../Card/Card'
 import { Button } from '../Button/Button'
+import { CounterBox } from '../CounterBox/CounterBox'
+import { Modal } from '../Modal/Modal'
 import { cards as cards, shuffle } from '../../utils/cards'
 import styles from '../CardsBox/CardsBox.module.css'
 
@@ -9,12 +11,16 @@ export function CardsBox() {
 	const [secondPick, setSecondPick] = useState(null)
 	const [flippedCards, setFlippedCards] = useState([])
 	const [isThrottled, setIsThrottled] = useState(false)
-
 	const [cardClicks, setCardClicks] = useState(0)
 	const [matchedPairs, setMatchedPairs] = useState(0)
-
 	const [stopwatchTime, setStopwatchTime] = useState(0)
 	const [stopwatchIsRunning, setStopwatchIsRunning] = useState(false)
+	const [isModalOpen, setIsModalOpen] = useState(false)
+
+	// Stopwatch calculation
+	const minutes = Math.floor((stopwatchTime % 360000) / 6000)
+	const seconds = Math.floor((stopwatchTime % 6000) / 100)
+	const milliseconds = stopwatchTime % 100
 
 	useEffect(() => {
 		let interval
@@ -27,21 +33,11 @@ export function CardsBox() {
 	}, [stopwatchIsRunning, stopwatchTime])
 
 	useEffect(() => {
-		if (flippedCards.length === 24 /* 24 */ && matchedPairs === 12 /* 12 */) {
-			// Alert for testing purposes
-			alert(
-				`Wygrana! Twój czas to: ${minutes.toString().padStart(2, '0')}:${seconds
-					.toString()
-					.padStart(2, '0')}:${milliseconds.toString().padStart(2, '0')}`
-			)
+		if (flippedCards.length === 24 && matchedPairs === 12) {
 			startAndStopStopwatch()
+			setIsModalOpen(true)
 		}
 	}, [flippedCards, matchedPairs])
-
-	// Stopwatch calculation
-	const minutes = Math.floor((stopwatchTime % 360000) / 6000)
-	const seconds = Math.floor((stopwatchTime % 6000) / 100)
-	const milliseconds = stopwatchTime % 100
 
 	function startAndStopStopwatch() {
 		setStopwatchIsRunning(!stopwatchIsRunning)
@@ -59,6 +55,7 @@ export function CardsBox() {
 		setCardClicks(0)
 		setMatchedPairs(0)
 		resetStopwatch()
+		setIsModalOpen(false)
 		shuffle(cards)
 	}
 
@@ -88,7 +85,7 @@ export function CardsBox() {
 			setIsThrottled(true)
 			if (firstPick.name.value === card.attributes.name.value) {
 				setMatchedPairs(matchedPairs + 1)
-				resetPicks() 
+				resetPicks()
 				setIsThrottled(false)
 			} else {
 				setTimeout(() => {
@@ -103,13 +100,12 @@ export function CardsBox() {
 	return (
 		<>
 			<div className={styles.infoBox}>
-				<div>
-					Time:&nbsp;
+				<CounterBox title='Clicks:'>{cardClicks}</CounterBox>
+				<CounterBox title='Time:' flexStart={true}>
 					{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}:
 					{milliseconds.toString().padStart(2, '0')}
-				</div>
-				<div>Clicks:&nbsp;{cardClicks}</div>
-				<div>Matched pairs:&nbsp;{matchedPairs}</div>
+				</CounterBox>
+				<CounterBox title='Pairs:'>{matchedPairs}</CounterBox>
 			</div>
 			<div className={styles.cardsBox}>
 				{cards.map(card => (
@@ -124,6 +120,7 @@ export function CardsBox() {
 				))}
 			</div>
 			<Button onClick={handleResetButton}>Reset</Button>
+			<Modal isModalOpen={isModalOpen}></Modal>
 		</>
 	)
 }
