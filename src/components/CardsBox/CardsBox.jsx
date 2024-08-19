@@ -17,7 +17,6 @@ export function CardsBox() {
 	const [stopwatchIsRunning, setStopwatchIsRunning] = useState(false)
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
-	// Stopwatch calculation
 	const minutes = Math.floor((stopwatchTime % 360000) / 6000)
 	const seconds = Math.floor((stopwatchTime % 6000) / 100)
 	const milliseconds = stopwatchTime % 100
@@ -36,7 +35,7 @@ export function CardsBox() {
 		if (flippedCards.length === 24 && matchedPairs === 12) {
 			startAndStopStopwatch()
 			setIsModalOpen(true)
-		}
+		} // eslint-disable-next-line
 	}, [flippedCards, matchedPairs])
 
 	function startAndStopStopwatch() {

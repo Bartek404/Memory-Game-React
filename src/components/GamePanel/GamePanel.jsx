@@ -1,5 +1,6 @@
 import { CardsBox } from '../CardsBox/CardsBox'
 import styles from '../GamePanel/GamePanel.module.css'
+
 export function GamePanel() {
 	return (
 		<div className={styles.panel}>

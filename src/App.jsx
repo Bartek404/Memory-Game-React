@@ -1,4 +1,3 @@
-import './App.css'
 import { GamePanel } from './components/GamePanel/GamePanel'
 
 function App() {

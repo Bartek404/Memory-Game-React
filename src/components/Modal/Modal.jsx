@@ -1,4 +1,5 @@
 import styles from '../Modal/Modal.module.css'
+
 export function Modal({ isModalOpen }) {
 	return isModalOpen ? (
 		<div className={`${styles.modalBody} ${styles.fireworks}`}>
