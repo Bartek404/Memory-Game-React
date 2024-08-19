@@ -1,5 +1,7 @@
 # Memory Game
 
+Preview link: https://memory-b404.netlify.app/
+
 The `Memory Game` is a memory card game built with React. It allows users to flip cards and match pairs, tracking the number of clicks and the time taken to complete the game.
 
 ## Features
